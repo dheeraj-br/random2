@@ -7,7 +7,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "ignorePatterns": ["build/"],
+  "ignorePatterns": [".husky/", ".eslintrc.json", ".prettierignore"],
   "plugins": ["promise"],
   "extends": ["airbnb-base", "prettier"],
   "rules": {
