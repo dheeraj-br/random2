@@ -30,3 +30,13 @@
 - add dotenv package as a dependency
 - `npm i dotenv `
 - create a folder called `env` that contains `.env.production` and `.env.development` files
+- add `.env.production` to .gitignore, since it contains sensitive data irrelevant to development cycle
+- file extension after `.env.` should be same as the values set in `NODE_ENV`
+- following file naming convention `.env.[NODE_ENV]`
+- add application configs to .env.[NODE_ENV] files. eg: db connection, api keys, external services
+- create a "configs" folder with `index.js` file
+- configure dotenv by adding path to `dotenv.config`
+- set absolute path to .env variable file using nodejs path module and `process.cwd()`
+- use `.env.${process.env.NODE_ENV}` pattern for file name
+- values from .env.[NODE_ENV] will now be added to the current running process's environment variables
+- create exportable object from environment variables
