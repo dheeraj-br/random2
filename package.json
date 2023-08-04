@@ -3,7 +3,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "lint:checkAll": "eslint .",
-    "format:fixAll": "npx eslint . --fix",
+    "format:fixAll": "eslint . --fix",
     "prepare": "husky install"
   },
   "dependencies": {
