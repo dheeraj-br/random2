@@ -1,9 +1,9 @@
 {
-  "prettier.enable": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.enableDebugLogs": true,
-  "editor.formatOnSave": true,
-  "javascript.inlayHints.enumMemberValues.enabled": true,
-  "eslint.enable": true,
-  "eslint.debug": true
+	"prettier.enable": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.enableDebugLogs": true,
+	"editor.formatOnSave": true,
+	"javascript.inlayHints.enumMemberValues.enabled": true,
+	"eslint.enable": true,
+	"eslint.debug": true
 }
