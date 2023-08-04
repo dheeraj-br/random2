@@ -6,7 +6,7 @@ function myFunction(item) {
   }
   let nutused;
   console.log('');
-}
+}  
 
 myArray.push(4);
 myObject.key = 'new value';
