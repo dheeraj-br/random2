@@ -10,12 +10,12 @@
 ---
 
 - install prettier extension for vsc, this will update files according to built-in prettier settings
-- vsc extension provides live hints in the editor & updates files on save according to the prettier rules
+- prettier extension provides live hints in the editor & updates files on save according to the prettier formatter rules
 - few prettier configs can be defined in workspace's settings.json which would be specific to vsc only
 - for compatibility with all editors, prettier configs should to be added to `.prettierrc.json`
 - run `npm i prettier --save-exact --save-dev`
 - adding npm package provides formatting rules and ensures consistency, new releases change rules
-- add `.prettierignore` directories and files mentioned are not formatted
+- add `.prettierignore`, directories and files mentioned here are not formatted
 - files and folders starting with . and node_modules are ignored by default
 - add custom rules to `.prettierrc.json`
 - eg: run `npx prettier --write src/` to manually fix formatting in "src" folder
@@ -35,16 +35,20 @@
 - eg: run `npm i eslint-plugin-promise eslint-config-airbnb-base --save-dev`
 - add plugin names under `plugin` key, config names under `extends` key
 - run `npx eslint .` to check for linting errors in "all" files
-- run `npx eslint . --fix` to update "all" files according to "linter's formatting" rules (?)
+- run `npx eslint . --fix` to update "all" files according to "linter's formatting" rules
 
 ---
 
 - prettier formatter must "turn off" eslint's formatting rules
-- add `eslint-config-prettier` to handle overriding
+- add `eslint-config-prettier` to turn off conflicting configs
 - run `npm install eslint-config-prettier --save-dev`
-- add config under extends key as the last option, so that it "turns off" other eslint configs as well
-- installing plugins for prettier is not necessary as config contains them implicitly
-- 'rules' in eslint overrides config 'extensions', we would need to remove conflicts with prettier.
+- add 'prettier' config under `extends` key as the last option, so that it "turns off" other conflicting configs
+- now prettier takes over formatting, eslint only handles linting.
+- this turns off formatting hits in the editor aswell, to fix this:
+- add `eslint-plugin-prettier` to turn off conflicting plugins
+- add 'prettier' plugin under `plugins` key as the last option, so that it "turns off" other conflicting plugins
+- add `"prettier/prettier": "error"` under `rules`, this will configure eslint to display errors from prettier.
+- 'rules' in eslint overrides 'extensions', we would need to remove conflicts with prettier.
 - run `npx eslint-config-prettier .\anyFile.ext` to check for eslint rules that conflict with prettier.
 - remove conflicting rules from .eslintrc.json
 
@@ -52,21 +56,23 @@
 
 - add commands to package.josn to manually lint and format code
 - `"lint:checkAll": "eslint ."`
-- `"format:all": "npx prettier --write ."`
+- `"format:fixAll": "eslint . --fix"`
 
 ---
 
 - add git hook pre-commit (using husky) to enforce linting rules on staged files (using lint-staged)
 - `npm i lint-staged husky --save-dev`
 - add `.lintstagedrc.json` file to hold commands that will be run against specific files and folders
-- call formatter and linter on all relevant files and folders
+- `{"**/*.{js,ts,html,css}": "eslint --fix"}`
+- use glob pattern to run command against all nested subfolders having any file name with ending with js, ts, html, css extensions
+- call eslint --fix to fix both formatting and linting errors with once command
 
 ---
 
-- add `prepare` script to package.json and call `husky install`
+- add `prepare` script to package.json that calls `husky install`
 - `npm pkg set scripts.prepare="husky install"` can be used to create it with command line
-- prepare script runs before and after `npm i` and before publishing package.
+- prepare script is built into package.json and runs before and after `npm i` and before publishing package.
 - `husky install` creates a new .husky folder with shell command folder, this should not be modified.
 - add pre-commit hook file by running `npx husky add .husky/pre-commit "npx lint-staged"`
-- this file will call the commands listed in `lint-staged` against staged files before a git commit is made
+- this file will call the commands listed in `lint-staged` against "staged" files before a git commit is made
 - pre commit hooks should be used to run linter, formatters and tests
