@@ -58,12 +58,13 @@
 
 - add git hook pre-commit (using husky) to enforce linting rules on staged files (using lint-staged)
 - `npm i lint-staged husky --save-dev`
-- 
-- add lint-staged command to call formatter and linter on pre-commit hook
-- add formatter and linter keys for lint-staged
+- add `.lintstagedrc.json` file to hold commands that will be run against specific files and folders
+- call formatter and linter on all relevant files and folders
 - 
 - add `prepare` script to package.json and call `husky install`
-- prepare script runs before and after `npm i` and before package publishing.
+- `npm pkg set scripts.prepare="husky install"` can be used
+- prepare script runs before and after `npm i` and before publishing package.
 - `husky install` creates a new .husky folder with shell command folder, this should not be modified.
-- add pre commit hook
-- `npx husky add .husky/pre-commit `
+- add pre commit hook by running `npx husky add .husky/pre-commit "npx lint-staged"`
+- this will call the commands listed in lint-staged on the staged files before a git commit is made 
+- pre commit hooks should be used to run linter, formatters and tests
