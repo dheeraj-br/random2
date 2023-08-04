@@ -1,0 +1,10 @@
+{
+  "prettier.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.enableDebugLogs": true,
+  "editor.formatOnSave": false,
+  // add hits to show implicit values held by enums
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "eslint.enable": true,
+  "eslint.debug": true
+}
