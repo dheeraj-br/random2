@@ -15,4 +15,4 @@ console.log(myArray);
 console.log(myObject);
 
 myFunction(myArray[0]);
-             
+                   
