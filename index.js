@@ -2,7 +2,8 @@ const myArray = [1, 2, 3];
 const myObject = { key: 'value' };
 
 function myFunction(item) {
-  {}
+  {
+  }
   let nutused;
   console.log('');
 }
@@ -15,4 +16,3 @@ console.log(myArray);
 console.log(myObject);
 
 myFunction(myArray[0]);
-                   
