@@ -1,4 +1,4 @@
-const myArray = [1, 2, 3];
+const myArray = [1, 2, 3, 5];
 const myObject = { key: 'value' };
 
 function myFunction(item) {
