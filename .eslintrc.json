@@ -1,0 +1,27 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"ignorePatterns": [
+		".husky/",
+		".eslintrc.json",
+		".prettierignore",
+		".vscode",
+		"*.md"
+	],
+	"plugins": [
+		"promise"
+	],
+	"extends": [
+		"airbnb-base",
+		"prettier"
+	],
+	"rules": {
+		"no-console": "error"
+	}
+}
