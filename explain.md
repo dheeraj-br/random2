@@ -35,7 +35,7 @@
 - eg: run `npm i eslint-plugin-promise eslint-config-airbnb-base --save-dev`
 - add plugin names under `plugin` key, config names under `extends` key
 - run `npx eslint .` to check for linting errors in "all" files
-- run `npx eslint . --fix` to update "all" files according to "linter's formatting" rules (?) 
+- run `npx eslint . --fix` to update "all" files according to "linter's formatting" rules (?)
 
 ---
 
@@ -60,11 +60,13 @@
 - `npm i lint-staged husky --save-dev`
 - add `.lintstagedrc.json` file to hold commands that will be run against specific files and folders
 - call formatter and linter on all relevant files and folders
-- 
+
+---
+
 - add `prepare` script to package.json and call `husky install`
-- `npm pkg set scripts.prepare="husky install"` can be used
+- `npm pkg set scripts.prepare="husky install"` can be used to create it with command line
 - prepare script runs before and after `npm i` and before publishing package.
 - `husky install` creates a new .husky folder with shell command folder, this should not be modified.
-- add pre commit hook by running `npx husky add .husky/pre-commit "npx lint-staged"`
-- this will call the commands listed in lint-staged on the staged files before a git commit is made 
+- add pre-commit hook file by running `npx husky add .husky/pre-commit "npx lint-staged"`
+- this file will call the commands listed in `lint-staged` against staged files before a git commit is made
 - pre commit hooks should be used to run linter, formatters and tests
