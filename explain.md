@@ -6,55 +6,52 @@
 
 [step4-env-variables/explain.md](https://github.com/dheeraj-br/random2/blob/step4-env-variables/explain.md)
 
-# add debugging
+[step5-debugging/explain.md](https://github.com/dheeraj-br/random2/blob/step5-debugging/explain.md)
 
-- vsc has built-in debugger, similar to browsers.
-- debugger can be attached to a running process or launch a new process in debug mode
-- vsc provides various way to use the debugger.
+# add central error handling
 
----
-
-- debugger can be configured to auto attach to any node process started with a `--inspect`` flag
-- when the process is started by a process manager (eg: nodemon/pm2) debugger auto attaches on every subsequent restart of the app
-
----
-
-- node process can be launched in debug mode using `start debugging` or `run and debug` option
-- with this method there is no option to configure how the app starts, all files are run on node
-- file changes don't reflect on the output since debug mode started without a process manager
+- install http-status for convenient list of http codes and descriptive names
+- adding a middleware with 4 parameter (error, req, res, next) makes it an error handler.
+- calling next(anyData) from a middleware will transfer execution control to the error handler, skipping all other middlewares
+- all exception thrown from a sync function is caught by error handler
+- promise rejections are not caught by error handlers
+- unhandled exceptions inside routes are caught by error handlers, express catches it if not none are defined
+- unhandled exceptions outside of routes can only be caught by listening to it on node "process"
+- all uncaught promise rejection can only be caught by listening to it on node "process"
 
 ---
 
-- adding a `launch.json` inside `.vscode` at the folder root allows to have various ways to launch debugger
-- options from debug tab can auto-generates a launch.json file stub for node
-- notable configs present in this file by default are "request", "runtimeExecutable" and "name"
-- "request" has 2 modes: "launch": launches new process in debug mode, "attach": attaches to an already running process
-- "runtimeExecutable": specifies executable that can manage the app (eg: process managers)
-- "name": a descriptive name to distinguish different debug modes
+- `unhandledRejection` are thrown when a promise is reject and there is no catch block to handle it
+- `uncaughtException` are thrown when code breaks and there is no try block, cannot happen inside routes since there are error handling middleware
+- inside an async method, exceptions become rejections. if not caught they become `unhandledRejection`
 
 ---
 
-- alternative option to launch a process in debug mode using a process manager
-- ensure `"request": "launch"` in the launch.json file is set
-- configuring `runtimeExecutable` to run `nodemon` will restart app on file change and reattach debugger
-- auto-generating stub in launch.json also achieves the same result
+- `unhandledRejection`
+- uncaught promise rejection from sync methods skip all error handling middlewares
+- uncaught promise rejection from async methods skip all error handling middlewares
+- uncaught promise rejection from async methods wrapped inside sync hof with try block skips all error handling middlewares
 
 ---
 
-- alternative option to launch a process in debug mode
-- using the stub in the launch.json file set `"request": "launch"`
-- will restart app with node, similar to running debugger without launch.json
+- `uncaughtException`
+- unhandled exception thrown from sync methods get caught by error handling middlewares
+- unhandled exception thrown from sync methods wrapped inside sync hof with try block get caught by error handling middlewares
+- unhandled exception thrown from async methods wrapped inside sync hof with try block get caught by error handling middlewares
+- unhandled exception thrown from any async methods without try block become `unhandledRejection` and skips all error handling middleware
 
 ---
 
-- to attach a debugger to an already running process, set `"request": "attach"`
-- the running process must be started with a `--inspect` flag
-- uses `"port": 9229` to establish connection between process and debugger through port: 9229
-- can also be configured to attach to only the current process using: `"processId": "${command:PickProcess}"`
-- `"restart": true` needs to be set to re attach debugger when app restarts
-- on app restart, new debugging state and app state is created, previous debug state/data is lost
+- errors can be categorized as "operational" and "programming"
+- "operational" error are invalid way of using the application.
+- "programming" errors are bugs present in the code
+- sensitive information about app and its users must not be displayed to the client
+- sensitive information about app and its users that are logged must be secured
+- "operational" errors might not need logging, logging this can be useful for metrics
+- "programming" errors must be logged for debugging and is the main purpose of having error handling
 
 ---
 
-- debugger can to connect to remote servers through ports, readonly version of code is displayed locally
-- there might be security risks when exposing debug ports, more research needed
+- operational errors such as 404 errors do not need logging or verbose error messages
+- these can be handled by adding a 'catch all' route after all other routes are added
+- controller of this route should not stop execution, should return a response to client directly

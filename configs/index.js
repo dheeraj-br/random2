@@ -9,6 +9,9 @@ dotenv.config({
 const config = {
   PORT: process.env.PORT,
   DOMAIN: process.env.DOMAIN,
+  PRODUCTION: 'production',
+  DEVELOPMENT: 'development',
+  NODE_ENV: process.env.NODE_ENV,
 };
 
 export default config;
