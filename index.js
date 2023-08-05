@@ -13,8 +13,8 @@ import pinoLogger from './pinoLogger.js';
 
 process.on('uncaughtException', (error) => {
   // only catches errors outside of routes
-  logger.log('error', 'uncaught exception, exiting app', error); // write to file, verbose
-  pinoLogger.error(error.message); // console log, short
+  logger.log('fatal', 'uncaught exception, exiting app', error); // write to file, verbose
+  pinoLogger.fatal(error.message); // console log, short
   // TODO: gracefully shutdown
   setTimeout(() => {
     process.exit(1);
@@ -59,8 +59,8 @@ const server = app.listen(configs.PORT);
 
 process.on('unhandledRejection', (error) => {
   // catches uncaught promises from entire app
-  logger.log('error', 'uncaught exception, exiting app', error); // write to file, verbose
-  pinoLogger.error(error.message); // console log, short
+  logger.log('fatal', 'uncaught exception, exiting app', error); // write to file, verbose
+  pinoLogger.fatal(error.message); // console log, short
   // TODO: gracefully shutdown
   server.close(() => {
     process.exit(1);
