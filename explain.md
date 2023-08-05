@@ -10,7 +10,7 @@
 ---
 
 - install prettier extension for vsc, this will update files according to built-in prettier settings
-- prettier extension provides live hints in the editor & updates files on save according to the prettier formatter rules
+- prettier extension updates files on save according to the prettier formatter rules
 - few prettier configs can be defined in workspace's settings.json which would be specific to vsc only
 - for compatibility with all editors, prettier configs should to be added to `.prettierrc.json`
 - run `npm i prettier --save-exact --save-dev`
