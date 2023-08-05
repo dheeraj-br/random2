@@ -21,8 +21,8 @@ const app = express();
 
 app.get('/errorHandler', () => {
   const customError = new CustomError(
-    httpStatus['500_NAME'].replaceAll('_', ' '),
-    httpStatus.INTERNAL_SERVER_ERROR,
+    httpStatus['503_NAME'].replaceAll('_', ' '),
+    httpStatus[503],
     true,
   );
   throw customError; // Express will catch this, if error handler is absent

@@ -28,17 +28,15 @@ export function catchAsyncRuntimeException(controller) {
 }
 
 export function pageNotFoundHandler(req, res) {
-  const customError = new CustomError(
-    httpStatus['404_NAME'].replaceAll('_', ' '), // TODO: use i18n
-    httpStatus.NOT_FOUND,
-    true,
-  );
-  res.send(customError);
+  res.send({
+    message: httpStatus['404_NAME'].replaceAll('_', ' '),
+    status: httpStatus.NOT_FOUND,
+  });
 }
 
 // eslint-disable-next-line no-unused-vars
 export function globalErrorHandler(error, req, res, next) {
-  if (error.isVerboseDisabled && config.NODE_ENV === config.DEVELOPMENT) {
+  if (error.isVerboseDisabled && config.NODE_ENV === config.PRODUCTION) {
     // TODO: add simple logging, dont use i18n
   } else {
     // TODO: add verbose logging, dont use i18n
