@@ -43,10 +43,8 @@ export function globalErrorHandler(error, req, res, next) {
   } else {
     // TODO: add verbose logging, dont use i18n
   }
-  const customError = new CustomError(
-    error.errorMessage || httpStatus['500_NAME'].replaceAll('_', ' '), // TODO: use i18n
-    error.statusCode || httpStatus.INTERNAL_SERVER_ERROR,
-    error.isVerboseDisabled || false,
-  );
-  res.send(customError);
+  res.send({
+    message: httpStatus['500_NAME'].replaceAll('_', ' '),
+    status: httpStatus.INTERNAL_SERVER_ERROR,
+  });
 }
