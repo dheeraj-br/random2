@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "start:debug": "nodemon --inspect index.js",
     "start": "nodemon index.js",
     "lint:checkAll": "eslint .",
     "format:fixAll": "eslint . --fix",
