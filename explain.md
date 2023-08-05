@@ -25,3 +25,4 @@ List of VSC extensions
 -	21	wayou.vscode-todo-highlight	
 -	22	wix.vscode-import-cost	
 -	23	yoavbls.pretty-ts-errors	
+-	24	yzhang.markdown-all-in-one
