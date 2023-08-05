@@ -15,6 +15,7 @@
 - add winston package, write error and fatal log levels to file.
 - add morgan, this will print to console all request made to the app
 - add pino and pino-pretty to log errors messages in colorful easily readable form, with less overhead
+- TODO: create factory patter to choose loggers
 - TODO: configure winston to write to console, and log http request from morgan
 - TODO: configure pino and winston to write to database (mongodb, elasticsearch, mysql, pg, redis)
 - TODO: configure pino to write to file, and log http request and response
